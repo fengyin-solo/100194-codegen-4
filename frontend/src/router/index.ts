@@ -19,6 +19,7 @@ const Spare = () => import('@/views/spare/index.vue')
 const Patrol = () => import('@/views/patrol/index.vue')
 const Accept = () => import('@/views/accept/index.vue')
 const Settle = () => import('@/views/settle/index.vue')
+const Complaint = () => import('@/views/complaint/index.vue')
 
 const router = createRouter({
   history: createWebHistory(),
@@ -42,6 +43,7 @@ const router = createRouter({
     { path: '/patrol', name: 'patrol', component: Patrol },
     { path: '/accept', name: 'accept', component: Accept },
     { path: '/settle', name: 'settle', component: Settle },
+    { path: '/complaint', name: 'complaint', component: Complaint },
   ],
 })
 
