@@ -244,3 +244,15 @@ class SettleEntry(BaseModel):
     field_5: str | None = None  # 补贴金额
     field_6: str | None = None  # 结算金额
     field_7: str | None = None  # 结算状态
+
+class ComplaintEntry(BaseModel):
+    """社区噪音光影投诉台账明细结构。"""
+
+    field_0: str | None = None  # 投诉编号
+    field_1: str | None = None  # 投诉来源
+    field_2: str | None = None  # 受理时间
+    field_3: str | None = None  # 影响时段
+    field_4: str | None = None  # 核查结论
+    field_5: str | None = None  # 答复期限
+    field_6: str | None = None  # 重复投诉数
+    field_7: str | None = None  # 办理状态

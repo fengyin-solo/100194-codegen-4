@@ -4,7 +4,7 @@
 """
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Callable
 
 from app.seed import SEED_ROWS
 
@@ -14,6 +14,15 @@ class Store:
         self._tables: dict[str, list[dict[str, Any]]] = {
             name: [dict(row) for row in rows] for name, rows in SEED_ROWS.items()
         }
+        self._refreshers: list[Callable[[], None]] = []
+
+    def register_refresher(self, refresher: Callable[[], None]) -> None:
+        """登记一个行内标记刷新回调：超期这类随时间变化的标记，读汇总前先重算。"""
+        self._refreshers.append(refresher)
+
+    def refresh(self) -> None:
+        for refresher in self._refreshers:
+            refresher()
 
     def module_names(self) -> list[str]:
         return sorted(self._tables)
@@ -28,6 +37,7 @@ class Store:
         return None
 
     def overview(self) -> dict[str, object]:
+        self.refresh()
         modules: list[dict[str, object]] = []
         for name in self.module_names():
             rows = self.rows(name)
